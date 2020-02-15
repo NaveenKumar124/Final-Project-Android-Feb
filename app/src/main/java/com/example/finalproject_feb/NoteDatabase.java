@@ -25,11 +25,28 @@ public class NoteDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        //create table
+        String createDb = "CREATE TABLE "+DATABASE_TABLE+" ("+
+                KEY_ID+" INTEGER PRIMARY KEY,"+
+                KEY_TITLE+" TEXT,"+
+                KEY_CONTENT+" TEXT,"+
+                KEY_DATE+" TEXT,"+
+                KEY_TIME+" TEXT"
+                +" )";
+        db.execSQL(createDb);
 
     }
 
+
+    // upgrade db if older version exists
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        if(oldVersion >= newVersion)
+            return;
+
+        db.execSQL("DROP TABLE IF EXISTS "+DATABASE_TABLE);
+        onCreate(db);
 
     }
 }
