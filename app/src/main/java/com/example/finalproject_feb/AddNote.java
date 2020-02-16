@@ -91,7 +91,12 @@ public class AddNote extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.save){
             if(noteTitle.getText().length() != 0){
-
+                Note note = new Note(noteTitle.getText().toString(),noteDetails.getText().toString(),todaysDate,currentTime);
+                NoteDatabase sDB = new NoteDatabase(this);
+                long id = sDB.addNote(note);
+//                Note check = sDB.getNote(id);
+//                Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
+                onBackPressed();
 
                 Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
             }else {
@@ -99,7 +104,7 @@ public class AddNote extends AppCompatActivity {
             }
 
         }else if(item.getItemId() == R.id.delete){
-            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

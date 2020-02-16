@@ -2,8 +2,12 @@ package com.example.finalproject_feb;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteDatabase extends SQLiteOpenHelper {
 
@@ -63,4 +67,41 @@ public class NoteDatabase extends SQLiteOpenHelper {
         long ID = db.insert(DATABASE_TABLE,null,v);
         return  ID;
     }
+
+    public Note getNote(long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] query = new String[] {KEY_ID,KEY_TITLE,KEY_CONTENT,KEY_DATE,KEY_TIME};
+        Cursor cursor=  db.query(DATABASE_TABLE,query,KEY_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
+        if(cursor != null)
+            cursor.moveToFirst();
+
+        return new Note(
+                Long.parseLong(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4));
+    }
+
+    public List<Note> getNotes(){
+        List<Note> allNotes = new ArrayList<>();
+        String query = "SELECT * FROM " + DATABASE_TABLE+" ORDER BY "+KEY_ID+" DESC";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            do{
+                Note note = new Note();
+                note.setId(Long.parseLong(cursor.getString(0)));
+                note.setTitle(cursor.getString(1));
+                note.setContent(cursor.getString(2));
+                note.setDate(cursor.getString(3));
+                note.setTime(cursor.getString(4));
+                allNotes.add(note);
+            }while (cursor.moveToNext());
+        }
+
+        return allNotes;
+
+    }
+
 }
