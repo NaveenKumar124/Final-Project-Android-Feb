@@ -92,10 +92,10 @@ public class AddNote extends AppCompatActivity {
         if(item.getItemId() == R.id.save){
             if(noteTitle.getText().length() != 0){
                 Note note = new Note(noteTitle.getText().toString(),noteDetails.getText().toString(),todaysDate,currentTime);
-                NoteDatabase sDB = new NoteDatabase(this);
-                long id = sDB.addNote(note);
-//                Note check = sDB.getNote(id);
-//                Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
+                NoteDatabase nDB = new NoteDatabase(this);
+                long id = nDB.addNote(note);
+                Note check = nDB.getNote(id);
+                Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
                 onBackPressed();
 
                 Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
