@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +17,8 @@ public class AddNote extends AppCompatActivity {
     Toolbar toolbar;
     EditText noteTitle, noteDetails;
     Calendar c;
+    String todaysDate;
+    String currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +50,19 @@ public class AddNote extends AppCompatActivity {
 
             }
         });
+
+        // set current date and time
+        c = Calendar.getInstance();
+        todaysDate = c.get(Calendar.YEAR)+"/"+(c.get(Calendar.MONTH)+1)+"/"+c.get(Calendar.DAY_OF_MONTH);
+        Log.d("DATE", "Date: "+todaysDate);
+        currentTime = pad(c.get(Calendar.HOUR))+":"+pad(c.get(Calendar.MINUTE));
+        Log.d("TIME", "Time: "+currentTime);
+
     }
+    private String pad(int time) {
+        if(time < 10)
+            return "0"+time;
+        return String.valueOf(time);
+
+    } 
 }
