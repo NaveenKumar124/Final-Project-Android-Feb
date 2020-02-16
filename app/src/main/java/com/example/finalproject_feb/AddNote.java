@@ -1,12 +1,18 @@
 package com.example.finalproject_feb;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,10 +30,18 @@ public class AddNote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-        //getSupportActionBar().setTitle("New Note");
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //getSupportActionBar().setTitle("New Note");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        setSupportActionBar(toolbar);
+        //toolbar.setTitle("New Note");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("New Note");
+
+
 
         noteTitle = findViewById(R.id.noteTitle);
         noteDetails = findViewById(R.id.noteDetails);
@@ -64,5 +78,30 @@ public class AddNote extends AppCompatActivity {
             return "0"+time;
         return String.valueOf(time);
 
-    } 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.save){
+            if(noteTitle.getText().length() != 0){
+
+
+                Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
+            }else {
+                noteTitle.setError("Title Can not be Blank.");
+            }
+
+        }else if(item.getItemId() == R.id.delete){
+            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
