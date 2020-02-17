@@ -96,7 +96,8 @@ public class AddNote extends AppCompatActivity {
                 long id = nDB.addNote(note);
                 Note check = nDB.getNote(id);
                 Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
-                onBackPressed();
+                //onBackPressed();
+                goToMain();
 
                 Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
             }else {
@@ -108,5 +109,12 @@ public class AddNote extends AppCompatActivity {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void goToMain() {
+
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+
     }
 }
