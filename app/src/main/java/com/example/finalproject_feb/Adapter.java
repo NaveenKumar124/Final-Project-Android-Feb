@@ -58,7 +58,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
              nTitle  = itemView.findViewById(R.id.nTitle);
              nDate   = itemView.findViewById(R.id.nDate);
              nTime   = itemView.findViewById(R.id.nTime);
-             nID     = itemView.findViewById(R.id.listId);
+             //nID     = itemView.findViewById(R.id.listId);
          }
      }
 }
