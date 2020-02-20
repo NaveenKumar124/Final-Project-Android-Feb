@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 public class Details extends AppCompatActivity {
 
     TextView mDetails;
+     NoteDatabase db;
+     Note note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +37,15 @@ public class Details extends AppCompatActivity {
         Intent i = getIntent();
         final Long id = i.getLongExtra("ID",0 );
 
-        final NoteDatabase db = new NoteDatabase(this);
+        db = new NoteDatabase(this);
 
-        final Note note = db.getNote(id);
+         note = db.getNote(id);
 
         getSupportActionBar().setTitle(note.getTitle());
 
         mDetails.setText(note.getContent());
+
+        mDetails.setMovementMethod(new ScrollingMovementMethod());
 
         //Toast.makeText(this,"ID = "+ id, Toast.LENGTH_SHORT).show();
 
@@ -49,6 +54,7 @@ public class Details extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db.deleteNote(note.getId());
+                Toast.makeText(getApplicationContext(),"Note is Deleted. ", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
@@ -67,9 +73,14 @@ public class Details extends AppCompatActivity {
         if(item.getItemId() == R.id.editNote){
             //send user to edit activity
             Toast.makeText(this,"Edit text",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this,Edit.class);
+            i.putExtra("ID", note.getId());
+            startActivity(i);
 
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
