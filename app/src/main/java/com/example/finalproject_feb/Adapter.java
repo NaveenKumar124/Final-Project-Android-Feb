@@ -1,6 +1,7 @@
 package com.example.finalproject_feb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
              itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
-                     Toast.makeText(v.getContext(),"Item clicked. ",Toast.LENGTH_SHORT).show();
+                     Intent i = new Intent(v.getContext(), Details.class);
+                     i.putExtra("ID",notes.get(getAdapterPosition()).getId());
+                     v.getContext().startActivity(i);
                  }
              });
          }
