@@ -3,7 +3,13 @@ package com.example.finalproject_feb;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +21,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+
+import com.google.android.gms.location.LocationServices;
 
 import java.util.Calendar;
 
@@ -25,6 +34,31 @@ public class AddNote extends AppCompatActivity {
     Calendar c;
     String todaysDate;
     String currentTime;
+
+    LocationManager locationManager;
+    LocationListener locationListener;
+    Location currentLocation;
+    Double latitude , longitude;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 1){
+            if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (ActivityCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER , 5000 , 10 , locationListener);
+
+                }
+
+            }else{
+                ActivityCompat.requestPermissions(this , new String[]{Manifest.permission.ACCESS_FINE_LOCATION} , 1);
+            }
+
+
+
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +79,51 @@ public class AddNote extends AppCompatActivity {
 
         noteTitle = findViewById(R.id.noteTitle);
         noteDetails = findViewById(R.id.noteDetails);
+
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                currentLocation = location;
+
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+
+
+
+
+
+
+        };
+
+
+        if (ActivityCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER , 5000 , 10 , locationListener);
+
+        }else{
+            ActivityCompat.requestPermissions(this , new String[]{Manifest.permission.ACCESS_FINE_LOCATION} , 1);
+        }
+
+
 
         noteTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -96,10 +175,11 @@ public class AddNote extends AppCompatActivity {
                 long id = nDB.addNote(note);
                 Note check = nDB.getNote(id);
                 Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
+
                 //onBackPressed();
                 goToMain();
 
-                Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,  latitude +","+longitude, Toast.LENGTH_SHORT).show();
             }else {
                 noteTitle.setError("Title Can not be Blank.");
             }

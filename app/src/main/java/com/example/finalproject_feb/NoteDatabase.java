@@ -11,7 +11,7 @@ import java.util.List;
 
 public class NoteDatabase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "notedbs";
     private static final String DATABASE_TABLE = "notestables";
 
@@ -23,7 +23,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
     private static final String KEY_TIME = "time";
 
 
-    NoteDatabase(Context context){
+    public NoteDatabase(Context context){
         super(context, DATABASE_NAME, null,DATABASE_VERSION);
     }
 
@@ -84,9 +84,13 @@ public class NoteDatabase extends SQLiteOpenHelper {
     }
 
     public List<Note> getNotes(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
         List<Note> allNotes = new ArrayList<>();
         String query = "SELECT * FROM " + DATABASE_TABLE+" ORDER BY "+KEY_ID+" DESC";
-        SQLiteDatabase db = this.getReadableDatabase();
+
+
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst()){
             do{
