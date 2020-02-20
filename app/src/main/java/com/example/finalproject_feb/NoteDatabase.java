@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,25 @@ public class NoteDatabase extends SQLiteOpenHelper {
 
         return allNotes;
 
+    }
+
+//    public int editNote(Note note){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues c = new ContentValues();
+//        Log.d("Edited", "Edited Title: -> "+ note.getTitle() + "\n ID -> "+note.getId());
+//        c.put(KEY_TITLE,note.getTitle());
+//        c.put(KEY_CONTENT,note.getContent());
+//        c.put(KEY_DATE,note.getDate());
+//        c.put(KEY_TIME,note.getTime());
+//        return db.update(DATABASE_TABLE,c,KEY_ID+"=?",new String[]{String.valueOf(note.getId())});
+//    }
+
+
+
+    void deleteNote(long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DATABASE_TABLE,KEY_ID+"=?",new String[]{String.valueOf(id)});
+        db.close();
     }
 
 }
