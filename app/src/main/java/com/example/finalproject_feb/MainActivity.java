@@ -66,13 +66,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void mapButtonPressed(View view) {
+//    public void mapButtonPressed(View view) {
+//
+//        Intent intent = new Intent(MainActivity.this , MapsActivity.class);
+//        startActivity(intent);
+//
+//    }
 
-        Intent intent = new Intent(MainActivity.this , MapsActivity.class);
-        startActivity(intent);
 
-
-
-
-    }
 }

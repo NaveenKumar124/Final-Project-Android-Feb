@@ -7,6 +7,7 @@ public class Note {
     private String content;
     private String date;
     private String time;
+    //private String loc;
 
     Note(String title,String content,String date, String time){
 
@@ -14,6 +15,7 @@ public class Note {
         this.content = content;
         this.date = date;
         this.time = time;
+        //this.loc = loc;
 
     }
 
@@ -24,6 +26,7 @@ public class Note {
         this.content = content;
         this.date = date;
         this.time = time;
+        //this.loc = loc;
 
     }
 
@@ -82,5 +85,15 @@ public class Note {
 
         this.time = time;
     }
+
+//    public String getLoc() {
+//
+//        return loc;
+//    }
+//
+//    public void setLoc(String loc) {
+//
+//        this.loc = loc;
+//    }
 
 }

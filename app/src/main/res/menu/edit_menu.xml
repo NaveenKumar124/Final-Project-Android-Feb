@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_mode_edit_black_24dp"
         android:title="Edit"
         app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--        android:id="@+id/locationOfNote"-->
+<!--        android:icon="@drawable/ic_location_on_black_24dp"-->
+<!--        android:title="Location"-->
+<!--        app:showAsAction="ifRoom" />-->
 </menu>

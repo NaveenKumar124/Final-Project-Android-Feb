@@ -25,6 +25,7 @@ public class Details extends AppCompatActivity {
      NoteDatabase db;
      Note note;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,15 @@ public class Details extends AppCompatActivity {
         mDetails.setMovementMethod(new ScrollingMovementMethod());
 
         //Toast.makeText(this,"ID = "+ id, Toast.LENGTH_SHORT).show();
+
+        FloatingActionButton loc = findViewById(R.id.loc);
+        loc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Details.this , MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +88,9 @@ public class Details extends AppCompatActivity {
             startActivity(i);
 
         }
+//        else if (item.getItemId() == R.id.locationOfNote){
+//            Toast.makeText(this,"Location",Toast.LENGTH_SHORT).show();
+//        }
         return super.onOptionsItemSelected(item);
     }
 

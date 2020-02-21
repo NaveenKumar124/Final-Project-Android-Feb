@@ -8,6 +8,16 @@
         android:title="Cancel"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/imageButton"
+        android:icon="@drawable/ic_attach_file_black_24dp"
+        android:title="Image"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/audioFile"
+        android:icon="@drawable/ic_keyboard_voice_black_24dp"
+        android:title="Audio"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/save"
         android:icon="@drawable/ic_check_black_24dp"
         android:title="Save"

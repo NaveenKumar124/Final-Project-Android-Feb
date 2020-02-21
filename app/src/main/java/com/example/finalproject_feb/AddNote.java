@@ -34,6 +34,8 @@ public class AddNote extends AppCompatActivity {
     Calendar c;
     String todaysDate;
     String currentTime;
+    String loc;
+    MapsActivity mloc  = new MapsActivity();
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -64,6 +66,8 @@ public class AddNote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -168,26 +172,33 @@ public class AddNote extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         if(item.getItemId() == R.id.save){
+
             if(noteTitle.getText().length() != 0){
                 Note note = new Note(noteTitle.getText().toString(),noteDetails.getText().toString(),todaysDate,currentTime);
                 NoteDatabase nDB = new NoteDatabase(this);
                 long id = nDB.addNote(note);
                 Note check = nDB.getNote(id);
                 Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
-
+                Toast.makeText(this,  latitude +","+longitude, Toast.LENGTH_SHORT).show();
                 //onBackPressed();
                 goToMain();
 
-                Toast.makeText(this,  latitude +","+longitude, Toast.LENGTH_SHORT).show();
+
             }else {
                 noteTitle.setError("Title Can not be Blank.");
             }
 
-        }else if(item.getItemId() == R.id.delete){
+        }
+        else if (item.getItemId() == R.id.imageButton){
+            Toast.makeText(this, "Image Button Clicked.", Toast.LENGTH_SHORT).show();
+        }
+        else if(item.getItemId() == R.id.delete){
             Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
             onBackPressed();
         }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -36,12 +36,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String  title    = notes.get(i).getTitle();
         String  date     = notes.get(i).getDate();
         String  time     = notes.get(i).getTime();
+        //String loc = notes.get(i).getLoc();
         long    id       = notes.get(i).getId();
         Log.d("date on ", "Date on: "+date);
 
         viewHolder.nTitle.setText(title);
         viewHolder.nDate.setText(date);
         viewHolder.nTime.setText(time);
+        //viewHolder.nLoc.setText(loc);
         viewHolder.nID.setText(String.valueOf(notes.get(i).getId()));
 
     }
