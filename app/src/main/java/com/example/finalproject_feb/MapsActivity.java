@@ -62,15 +62,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Intent i = getIntent();
-        final Long id = i.getLongExtra("ID",0 );
-
-        db = new NoteDatabase(this);
-
-//        note = db.getNote(id);
+//        Intent i = getIntent();
+//        final Long id = i.getLongExtra("ID",0 );
 //
-//        cloc  = note.getLoc();
+//        db = new NoteDatabase(this);
 
+        //note = db.getNote(id);
+
+//        cloc  = note.getLoc();
+//
 //        String[] latlng = cloc.split(",");
 //        double latitude = Double.parseDouble(latlng[0]);
 //        double longitude = Double.parseDouble(latlng[1]);
