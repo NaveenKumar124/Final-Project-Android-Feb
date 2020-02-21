@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -28,6 +29,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationCallback locationCallback;
     LocationRequest locationRequest;
+
+    NoteDatabase db;
+    Note note;
+
+
+    String cloc;
+
 
     public String finalLoc;
 
@@ -53,6 +61,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Intent i = getIntent();
+        final Long id = i.getLongExtra("ID",0 );
+
+        db = new NoteDatabase(this);
+
+//        note = db.getNote(id);
+//
+//        cloc  = note.getLoc();
+
+//        String[] latlng = cloc.split(",");
+//        double latitude = Double.parseDouble(latlng[0]);
+//        double longitude = Double.parseDouble(latlng[1]);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
