@@ -182,7 +182,7 @@ public class AddNote extends AppCompatActivity {
                 long id = nDB.addNote(note);
                 Note check = nDB.getNote(id);
                 Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
-                Toast.makeText(this,  latitude +","+longitude, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,  latitude +","+longitude, Toast.LENGTH_SHORT).show();
                 //onBackPressed();
                 goToMain();
 
@@ -194,6 +194,9 @@ public class AddNote extends AppCompatActivity {
         }
         else if (item.getItemId() == R.id.imageButton){
             Toast.makeText(this, "Image Button Clicked.", Toast.LENGTH_SHORT).show();
+        }
+        else if (item.getItemId() == R.id.audioFile){
+            Toast.makeText(this, "Audio Button Clicked.", Toast.LENGTH_SHORT).show();
         }
         else if(item.getItemId() == R.id.delete){
             Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
