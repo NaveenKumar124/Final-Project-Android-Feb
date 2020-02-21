@@ -36,7 +36,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String  title    = notes.get(i).getTitle();
         String  date     = notes.get(i).getDate();
         String  time     = notes.get(i).getTime();
-        //String loc = notes.get(i).getLoc();
+        String loc = notes.get(i).getLoc();
         long    id       = notes.get(i).getId();
         Log.d("date on ", "Date on: "+date);
 
@@ -64,6 +64,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
              nDate   = itemView.findViewById(R.id.nDate);
              nTime   = itemView.findViewById(R.id.nTime);
              nID     = itemView.findViewById(R.id.listId);
+             //nLoc     = itemView.findViewById(R.id.map);
 
              itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
